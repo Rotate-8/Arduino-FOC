@@ -50,7 +50,7 @@ public:
 
     float calculate(float new_target = NOT_SET);
 
-    void setOutput(float new_target = NOT_SET);
+    void setOutput(float new_target = NOT_SET) override;
 
    /**
     * @param Uq Voltage to set to the motor
