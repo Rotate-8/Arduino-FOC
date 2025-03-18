@@ -143,7 +143,7 @@ float DCMotor::calculate(float new_target) {
     if(_isset(new_target)) target = new_target;
 
     // open-loop not supported
-    if( controller==MotionControlType::angle_openloop || controller==MotionControlType::velocity_openloop ) return;
+    if( controller==MotionControlType::angle_openloop || controller==MotionControlType::velocity_openloop ) return 0;
     
     // if disabled do nothing
     if(!enabled) return 0;
