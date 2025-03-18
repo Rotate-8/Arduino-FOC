@@ -146,7 +146,7 @@ float DCMotor::calculate(float new_target) {
     if( controller==MotionControlType::angle_openloop || controller==MotionControlType::velocity_openloop ) return;
     
     // if disabled do nothing
-    if(!enabled) return;
+    if(!enabled) return 0;
 
     // get angle
     voltage.d = 0.0f; // not used for DC motors
@@ -173,7 +173,7 @@ float DCMotor::calculate(float new_target) {
             voltage.q = 0.0f;
             disable();
             motor_status = FOCMotorStatus::motor_error; // we don't support this mode
-            return;
+            return 0;
     }
     // set the voltage to the motor
     //setPhaseVoltage(voltage.q, 0.0f, 0.0f);
@@ -185,7 +185,7 @@ void DCMotor::setOutput(float new_target) {
 
     float voltage_target = calculate(new_target);
     setPhaseVoltage(voltage_target, 0.0f, 0.0f);
-    
+
 }
 
 
