@@ -48,9 +48,9 @@ public:
      */
     void move(float new_target = NOT_SET) override;
 
-    float calculate(float new_target = NOT_SET) override;
+    float calculate(float new_target = NOT_SET);
 
-    void setOutput(float new_target = NOT_SET) override;
+    void setOutput(float new_target = NOT_SET);
 
    /**
     * @param Uq Voltage to set to the motor
