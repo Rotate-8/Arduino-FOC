@@ -48,7 +48,7 @@ public:
      */
     void move(float new_target = NOT_SET) override;
 
-    float calculate(float new_target = NOT_SET);
+    float calculate(float new_target = NOT_SET) override;
 
     void setOutput(float new_target = NOT_SET) override;
 
