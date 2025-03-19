@@ -124,7 +124,7 @@ class FOCMotor
     virtual void move(float target = NOT_SET)=0;
 
     virtual void setOutput(float target = NOT_SET) = 0;
-    virtual void caclulate(float target = NOT_SET) = 0;
+    virtual void calculate(float target = NOT_SET) = 0;
 
     /**
     * Method using FOC to set Uq to the motor at the optimal angle
