@@ -132,65 +132,9 @@ void DCMotor::move(float new_target) {
     setPhaseVoltage(voltage.q, 0.0f, 0.0f);
 };
 
-
-float DCMotor::calculate(float new_target) {
-    // get angular velocity
-    if (sensor) sensor->update();
-    shaft_angle = shaftAngle();
-    shaft_velocity = shaftVelocity();
-
-    // update motor target
-    if(_isset(new_target)) target = new_target;
-
-    // open-loop not supported
-    if( controller==MotionControlType::angle_openloop || controller==MotionControlType::velocity_openloop ) return 0;
-    
-    // if disabled do nothing
-    if(!enabled) return 0;
-
-    // get angle
-    voltage.d = 0.0f; // not used for DC motors
-    switch (controller) {
-        case MotionControlType::torque:
-            if (torque_controller == TorqueControlType::voltage)
-                voltage.q = target;
-            else
-                voltage.q = 0.0f; // TODO implement the other torque modes, and current control loop
-            break;
-        case MotionControlType::angle:
-            // angle set point
-            // include angle loop
-            shaft_angle_sp = target;
-            shaft_velocity_sp = P_angle( shaft_angle_sp - shaft_angle );
-            voltage.q = PID_velocity(shaft_velocity_sp - shaft_velocity);
-            break;
-        case MotionControlType::velocity:
-            // velocity set point
-            shaft_velocity_sp = target;
-            voltage.q = PID_velocity(shaft_velocity_sp - shaft_velocity);
-            break;
-        default:
-            voltage.q = 0.0f;
-            disable();
-            motor_status = FOCMotorStatus::motor_error; // we don't support this mode
-            return 0;
-    }
-    // set the voltage to the motor
-    //setPhaseVoltage(voltage.q, 0.0f, 0.0f);
-
-    return voltage.q;
-};
-
-void DCMotor::setOutput(float new_target) {
-
-    float voltage_target = calculate(new_target);
+void DCMotor::setOutput(float voltage_target) {
     setPhaseVoltage(voltage_target, 0.0f, 0.0f);
-
 }
-
-
-
-
 
 void DCMotor::setPhaseVoltage(float Uq, float Ud, float angle_el) {
     if (enabled==1)
