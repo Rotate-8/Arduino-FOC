@@ -37,6 +37,17 @@ public:
     /** Motor enable function */
     void enable() override;
 
+    /**
+     * Function calculating the output of the control loops set by the controller parameter of the BLDCMotor.
+     * 
+     * @param target  Either voltage, angle or velocity based on the motor.controller
+     *                If it is not set the motor will use the target set in its variable motor.target
+     * 
+     * This function doesn't need to be run upon each loop execution - depends of the use case
+     * Note: This function does not apply the output to the hardware. To run the control loop and 
+     *       set the output voltage with one function, use `move`.
+     */
+    float runControlLoop(float new_target = NOT_SET);
 
     /**
      * Function executing the control loops set by the controller parameter of the DCMotor.

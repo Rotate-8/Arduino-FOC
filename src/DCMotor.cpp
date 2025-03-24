@@ -85,8 +85,7 @@ void DCMotor::enable() {
     enabled = 1;
 };
 
-
-void DCMotor::move(float new_target) {
+float DCMotor::runControlLoop(float new_target) {
     // get angular velocity
     if (sensor) sensor->update();
     shaft_angle = shaftAngle();
@@ -96,10 +95,10 @@ void DCMotor::move(float new_target) {
     if(_isset(new_target)) target = new_target;
 
     // open-loop not supported
-    if( controller==MotionControlType::angle_openloop || controller==MotionControlType::velocity_openloop ) return;
+    if( controller==MotionControlType::angle_openloop || controller==MotionControlType::velocity_openloop ) return 0.0f;
     
     // if disabled do nothing
-    if(!enabled) return;
+    if(!enabled) return 0.0f;
 
     // get angle
     voltage.d = 0.0f; // not used for DC motors
@@ -126,10 +125,16 @@ void DCMotor::move(float new_target) {
             voltage.q = 0.0f;
             disable();
             motor_status = FOCMotorStatus::motor_error; // we don't support this mode
-            return;
+            return 0.0f;
     }
-    // set the voltage to the motor
-    setPhaseVoltage(voltage.q, 0.0f, 0.0f);
+
+    return voltage.q;
+}
+
+
+void DCMotor::move(float new_target) {
+    float v_q = runControlLoop(new_target);
+    setPhaseVoltage(v_q, 0.0f, 0.0f);
 };
 
 
