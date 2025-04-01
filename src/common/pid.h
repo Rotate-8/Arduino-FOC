@@ -19,7 +19,7 @@ public:
      * @param ramp - Maximum speed of change of the output value
      * @param limit - Maximum output value
      */
-    PIDController(float P, float I, float D, float ramp, float limit);
+    PIDController(float P, float I, float D, float ramp, float limit, float deadband = 0.0f);
     ~PIDController() = default;
 
     float operator() (float error);
@@ -30,6 +30,7 @@ public:
     float D; //!< Derivative gain 
     float output_ramp; //!< Maximum speed of change of the output value
     float limit; //!< Maximum output value
+    float error_deadband; //!< Absolute deadband, below which error will be 0
 
 protected:
     float error_prev; //!< last tracking error value
