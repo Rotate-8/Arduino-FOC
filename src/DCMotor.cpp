@@ -137,6 +137,9 @@ void DCMotor::move(float new_target) {
     setPhaseVoltage(v_q, 0.0f, 0.0f);
 };
 
+void DCMotor::setOutput(float voltage_target) {
+    setPhaseVoltage(voltage_target, 0.0f, 0.0f);
+}
 
 void DCMotor::setPhaseVoltage(float Uq, float Ud, float angle_el) {
     if (enabled==1)

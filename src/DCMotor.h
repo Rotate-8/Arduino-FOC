@@ -59,6 +59,8 @@ public:
      */
     void move(float new_target = NOT_SET) override;
 
+    void setOutput(float voltage_target = NOT_SET) override; //directly set the voltage on the output - used for setting it to zero
+
    /**
     * @param Uq Voltage to set to the motor
     * @param Ud ignored for DC motors
