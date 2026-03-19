@@ -2,7 +2,7 @@
 #pragma once
 
 #include <common/base_classes/FOCMotor.h>
-#include "driver/DCDriver.h"
+#include "drivers/DCDriver.h"
 
 /**
  * Class implementing control of DC motors.
@@ -29,7 +29,7 @@ public:
       * DCDriver link
       */
     DCDriver* driver;
-    
+
     /**  Motor hardware init function */
   	int init() override;
     /** Motor disable function */

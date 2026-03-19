@@ -24,7 +24,7 @@ class DCDriver4PWM : public DCDriver {
          * @param U voltage
         */
         virtual void setPwm(float U) override;
-        
+
         int pinA_h;
         int pinA_l;
         int pinB_h;

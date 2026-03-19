@@ -109,6 +109,7 @@ void loop() {
 #ifndef SIMPLEFOC_H
 #define SIMPLEFOC_H
 
+#include "DCMotor.h"
 #include "BLDCMotor.h"
 #include "StepperMotor.h"
 #include "HybridStepperMotor.h"
@@ -119,6 +120,7 @@ void loop() {
 #include "sensors/MagneticSensorPWM.h"
 #include "sensors/HallSensor.h"
 #include "sensors/GenericSensor.h"
+#include "drivers/DCDriver4PWM.h"
 #include "drivers/BLDCDriver3PWM.h"
 #include "drivers/BLDCDriver6PWM.h"
 #include "drivers/StepperDriver4PWM.h"

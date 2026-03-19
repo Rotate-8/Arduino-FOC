@@ -6,7 +6,7 @@
 
 class DCDriver{
     public:
-        
+
         /** Initialise hardware */
         virtual int init() = 0;
         /** Enable hardware */
@@ -28,5 +28,5 @@ class DCDriver{
          * Positive voltages are associated with the "forward" direction, negative voltages with the "reverse" direction
          * @param U voltage
         */
-        virtual void setPwm(float U) = 0;        
+        virtual void setPwm(float U) = 0;
 };
