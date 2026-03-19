@@ -1,11 +1,12 @@
 #include "pid.h"
 
-PIDController::PIDController(float P, float I, float D, float ramp, float limit, float sampling_time)
+PIDController::PIDController(float P, float I, float D, float ramp, float limit, float deadband, float sampling_time)
     : P(P)
     , I(I)
     , D(D)
     , output_ramp(ramp)    // output derivative limit [ex. volts/second]
     , limit(limit)         // output supply limit     [ex. volts]
+    , error_deadband(deadband)
     , Ts(sampling_time)    // sampling time [S]
     , error_prev(0.0f)
     , output_prev(0.0f)
@@ -27,6 +28,9 @@ float PIDController::operator() (float error){
         if(dt <= 0 || dt > 0.5f) dt = 1e-3f;
         timestamp_prev = timestamp_now;
     }
+
+    // Filter out error below deadband
+    if(abs(error) < error_deadband) error = 0.0f;
 
     // u(s) = (P + I/s + Ds)e(s)
     // Discrete implementations

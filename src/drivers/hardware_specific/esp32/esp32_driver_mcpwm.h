@@ -132,6 +132,7 @@ long _calcPWMFreq(long pwm_period);
  * @return ESP32MCPWMDriverParams* - pointer to the driver parameters if successful, -1 if failed
  */
 void* _configure6PWMPinsMCPWM(long pwm_frequency, int mcpwm_group, int timer_no, float dead_zone, int* pins);
+void* _configure4PWMPinsMCPWM(long pwm_frequency, int mcpwm_group, int timer_no, float dead_zone, int* pins);
 /**
  * function configuring the MCPWM for pwm generation
  * @param pwm_frequency - frequency of the pwm signal

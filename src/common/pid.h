@@ -25,7 +25,7 @@ public:
      * @note Sampling time can be changed dynamically as well by modifying the 
      *       variable Ts in runtime.
      */
-    PIDController(float P, float I, float D, float ramp = NOT_SET, float limit = NOT_SET, float sampling_time = NOT_SET);
+    PIDController(float P, float I, float D, float ramp = NOT_SET, float limit = NOT_SET, float deadband = 0.0f, float sampling_time = NOT_SET);
     ~PIDController() = default;
 
     float operator() (float error);
@@ -37,8 +37,9 @@ public:
     float output_ramp; //!< Maximum speed of change of the output value
     float limit; //!< Maximum output value
     float Ts; //!< Fixed sampling time (optional default NOT_SET)
+    float error_deadband; //!< Absolute deadband, below which error will be 0
 
-protected:
+//protected:
     float error_prev; //!< last tracking error value
     float output_prev;  //!< last pid output value
     float integral_prev; //!< last integral component value

@@ -93,6 +93,8 @@ void* _configure3PWM(long pwm_frequency, const int pinA, const int pinB, const i
  */
 void* _configure4PWM(long pwm_frequency, const int pin1A, const int pin1B, const int pin2A, const int pin2B);
 
+void* _configure4PWM_DCMotor(long pwm_frequency, float dead_zone, const int pinA, const int pinB, const int pinC, const int pinD);
+
 /** 
  * Configuring PWM frequency, resolution and alignment
  * - BLDC driver - 6PWM setting
@@ -157,7 +159,7 @@ void _writeDutyCycle3PWM(float dc_a,  float dc_b, float dc_c, void* params);
  * @param params  the driver parameters
  */ 
 void _writeDutyCycle4PWM(float dc_1a,  float dc_1b, float dc_2a, float dc_2b, void* params);
-
+void _writeDutyCycle4PWM_DC(float dc_a, float dc_b, void* params);
 
 /** 
  * Function setting the duty cycle to the pwm pin (ex. analogWrite())
